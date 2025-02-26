@@ -22,7 +22,8 @@ public:
         do {
             old_write_cursor = write_cursor.load(std::memory_order_acquire);
             new_write_cursor = (old_write_cursor + size) % buffer_size;
-            if (new_write_cursor == read_cursor.load(std::memory_order_acquire)) {
+            size_t available_space = buffer_size - (write_cursor - read_cursor);
+            if (new_write_cursor == read_cursor.load(std::memory_order_acquire) && size < available_space) {
                 return false; // empty buffer
             }
         } while (!write_cursor.compare_exchange_weak(old_write_cursor, new_write_cursor, std::memory_order_release));
