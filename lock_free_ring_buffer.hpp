@@ -1,4 +1,3 @@
-#include <iostream>
 #include <atomic>
 
 template<int size, typename T = char>
@@ -10,7 +9,6 @@ class ring_buffer {
     std::atomic<T*> write_pointer;
 
 public:
-
     ring_buffer() {
         memset(buffer, 0, buffer_size);
         read_cursor.store(0);
