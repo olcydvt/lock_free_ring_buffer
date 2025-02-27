@@ -18,8 +18,6 @@ public:
         write_pointer.store(nullptr);
     }
 
-  
-
     bool write(const T* data, size_t size) {
         size_t old_write_cursor, new_write_cursor;
         do {
@@ -32,7 +30,6 @@ public:
             }
         } while (!write_cursor.compare_exchange_weak(old_write_cursor, new_write_cursor, std::memory_order_release));
     
-
         for (size_t i = 0; i < size; ++i) {
             buffer[(old_write_cursor + i) & (buffer_size - 1)] = data[i];
         }
@@ -41,7 +38,6 @@ public:
         do {
             current_write_pointer = write_pointer.load(std::memory_order_acquire);
         } while (!write_pointer.compare_exchange_weak(current_write_pointer, buffer + ((&buffer[buffer_size-1] - current_write_pointer)  + size) % buffer_size, std::memory_order_release));
-        
         return true;
     }
 
@@ -55,31 +51,9 @@ public:
             new_read_cursor = (old_read_cursor + size) % buffer_size;
         } while (!read_cursor.compare_exchange_weak(old_read_cursor, new_read_cursor, std::memory_order_release));
 
-
-        
         for (size_t i = 0; i < size; ++i) {
             data[i] = buffer[(old_read_cursor + i) & (buffer_size - 1)];
         }
         return true;
     }
 };
-
-struct test {
-    int a;
-};
-
-int main()
-{
-    test t{};
-    t.a = 5;
-    ring_buffer<10, test> ring_bfr;
-    t.a = 3;
-    ring_bfr.write(&t, sizeof(t));
-
-    test* read_data{nullptr};
-    test* t_ptr = reinterpret_cast<test*>(ring_bfr.read(read_data, 4));
-
-    return 0;
-
-}
-
