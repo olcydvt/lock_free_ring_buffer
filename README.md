@@ -1,10 +1,9 @@
 # Lock Free Ring Buffer
 
-see the Compiler Explorer [Link](https://compiler-explorer.com/z/Yea8f3MaP) output with the thread sanitizer flag(-std=c++20 -fsanitize=thread -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer)
+see the Compiler Explorer [Link](https://compiler-explorer.com/z/Yea8f3MaP) that shows you output along with thread sanitizer check(-std=c++20 -fsanitize=thread -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer)
 
 
 ## Usage
-
 ```c++
 #include <thread>
 #include <vector>
@@ -42,13 +41,5 @@ int main() {
 }
 ```
 
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
-
 ## License
-
 [MIT](https://choosealicense.com/licenses/mit/)
