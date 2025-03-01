@@ -1,4 +1,4 @@
-# Lock Free Ring Buffer
+# Lock Free MPMC Ring Buffer
 
 see the Compiler Explorer [Link](https://compiler-explorer.com/z/Yea8f3MaP) that shows you output along with thread sanitizer check(-std=c++20 -fsanitize=thread -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer)
 
