@@ -15,7 +15,7 @@ int main() {
 
     for (int i = 0; i < 128; ++i) {
         threads.emplace_back(
-            std::thread([&, i] { bool written = ring_bfr.try_write(i, 1); }));
+            std::thread([&, i] { bool written = ring_bfr.try_write(i); }));
     }
 
     for (int i = 0; i < 128; ++i) {
