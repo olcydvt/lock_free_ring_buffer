@@ -29,9 +29,7 @@ int main() {
         th.join();
     }
 
-    // test the values readen from ring buffer by indexing in map.
-    // value of each index must be 1, therefore we can say that there is no
-    // duplicated write for same value
+    // Examine the values retrieved from the ring buffer by indexing in MAP. Each index value should equal 1, which indicates that there are no duplicate writes for the same value.
     std::map<int, int> map;
     for (auto& val : values) {
         map[val] += 1;
